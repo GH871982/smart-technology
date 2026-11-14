@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Match these two to the official logo once it is added (see public/brand/README.md) */
+:root { --brand-purple: #7855FF; --brand-red: #E5233D; }
+html { scroll-behavior: smooth; color-scheme: dark; }
+@layer base {
+  body {
+    @apply bg-midnight text-white antialiased;
+    background-image: radial-gradient(60rem 40rem at 85% -10%, rgba(120,85,255,.18), transparent), radial-gradient(50rem 30rem at 0% 25%, rgba(8,124,255,.12), transparent);
+    background-attachment: fixed;
+  }
+}
+@layer components {
+  .glass { @apply border border-white/10 bg-white/[0.04] backdrop-blur-xl; }
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan; }
+  .btn-primary { @apply bg-gradient-to-r from-electric to-neon text-white shadow-lg shadow-electric/20 hover:brightness-110; }
+  .btn-ghost { @apply glass text-white/90 hover:bg-white/10; }
+  .field { @apply w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm outline-none transition placeholder:text-white/40 focus:border-cyan focus:ring-1 focus:ring-cyan; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, ::before, ::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
