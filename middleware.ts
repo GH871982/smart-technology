@@ -27,7 +27,8 @@ export async function middleware(request: NextRequest) {
   const { data: { user } } = await supabase.auth.getUser();
   const isAdminPath = request.nextUrl.pathname.startsWith("/admin");
   const isLogin = request.nextUrl.pathname === "/admin/login";
-  const isAdmin = user?.app_metadata?.role === "admin";
+  const role = user?.app_metadata?.role;
+  const isAdmin = role === "admin" || role === "super_admin";
 
   if (isAdminPath && !isLogin && !isAdmin) {
     const destination = user ? "/admin/login?role=denied" : "/admin/login";
