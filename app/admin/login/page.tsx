@@ -29,7 +29,8 @@ export default function AdminLoginPage() {
       const { error: authError } = await supabase.auth.signInWithPassword({ email, password });
       if (authError) throw authError;
       const { data: { user } } = await supabase.auth.getUser();
-      if (user?.app_metadata?.role !== "admin") {
+      const role = user?.app_metadata?.role;
+      if (role !== "admin" && role !== "super_admin") {
         await supabase.auth.signOut();
         setRoleDenied(true);
         throw new Error("هذا الحساب ليس لديه صلاحية مدير.");
@@ -47,9 +48,9 @@ export default function AdminLoginPage() {
     <div className="w-full max-w-md rounded-3xl border border-white/10 bg-white/[.04] p-8 shadow-2xl">
       <div className="mb-8 flex items-center gap-3"><span className="grid h-12 w-12 place-items-center rounded-2xl bg-cyan-400/10 text-cyan-300"><Cpu size={27}/></span><div><p className="font-bold tracking-wider">SMART TECHNOLOGY</p><p className="text-sm text-white/45">لوحة الإدارة</p></div></div>
       <h1 className="text-2xl font-bold">تسجيل الدخول</h1>
-      <p className="mt-2 text-sm leading-7 text-white/50">سجّل الدخول بحساب الإدارة المضاف في مشروع Supabase.</p>
+      <p className="mt-2 text-sm leading-7 text-white/50">سجّل الدخول بحساب يحمل صلاحية admin أو super_admin.</p>
       {setup && <p className="mt-5 rounded-xl border border-amber-400/20 bg-amber-400/10 p-3 text-sm leading-6 text-amber-200">يلزم إعداد مفاتيح Supabase في متغيرات البيئة قبل استخدام لوحة الإدارة.</p>}
-      {roleDenied && <p className="mt-5 rounded-xl border border-red-400/20 bg-red-400/10 p-3 text-sm leading-6 text-red-200">هذا الحساب ليس مديرًا. تأكد من تعيين App Metadata: role=admin.</p>}
+      {roleDenied && <p className="mt-5 rounded-xl border border-red-400/20 bg-red-400/10 p-3 text-sm leading-6 text-red-200">هذا الحساب ليس مديرًا. تأكد من تعيين App Metadata: role=admin أو super_admin.</p>}
       <form onSubmit={submit} className="mt-7 space-y-4">
         <label className="block text-sm text-white/70">البريد الإلكتروني<input required type="email" autoComplete="username" value={email} onChange={e=>setEmail(e.target.value)} className="mt-2 w-full rounded-xl border border-white/10 bg-black/20 px-4 py-3 text-white outline-none focus:border-cyan-300" /></label>
         <label className="block text-sm text-white/70">كلمة المرور<input required type="password" autoComplete="current-password" value={password} onChange={e=>setPassword(e.target.value)} className="mt-2 w-full rounded-xl border border-white/10 bg-black/20 px-4 py-3 text-white outline-none focus:border-cyan-300" /></label>
