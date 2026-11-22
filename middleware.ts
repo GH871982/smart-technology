@@ -27,9 +27,13 @@ export async function middleware(request: NextRequest) {
   const { data: { user } } = await supabase.auth.getUser();
   const isAdminPath = request.nextUrl.pathname.startsWith("/admin");
   const isLogin = request.nextUrl.pathname === "/admin/login";
+  const isAdmin = user?.app_metadata?.role === "admin";
 
-  if (isAdminPath && !isLogin && !user) return NextResponse.redirect(new URL("/admin/login", request.url));
-  if (isLogin && user) return NextResponse.redirect(new URL("/admin", request.url));
+  if (isAdminPath && !isLogin && !isAdmin) {
+    const destination = user ? "/admin/login?role=denied" : "/admin/login";
+    return NextResponse.redirect(new URL(destination, request.url));
+  }
+  if (isLogin && isAdmin) return NextResponse.redirect(new URL("/admin", request.url));
   return response;
 }
 
