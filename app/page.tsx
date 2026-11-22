@@ -1,4 +1,5 @@
 import { ArrowUpLeft, Laptop, Monitor, Camera, Wifi, GraduationCap, Code2, Wrench, ShieldCheck, MessageCircle, Phone, MapPin, ArrowLeft, Zap, CheckCircle2, Cpu, Globe2, Settings2 } from "lucide-react";\nimport PageVisitTracker from "@/app/components/PageVisitTracker";
+import AuthHeader from "@/app/components/AuthHeader";
 
 const phone = "01145524545";
 const wa = "https://wa.me/201145524545";
@@ -26,7 +27,7 @@ export default function Home() {
         <nav className="hidden items-center gap-8 text-sm text-white/65 md:flex">
           <a className="hover:text-cyan-300" href="#about">من نحن</a><a className="hover:text-cyan-300" href="#services">خدماتنا</a><a className="hover:text-cyan-300" href="#why">لماذا نحن</a><a className="hover:text-cyan-300" href="#contact">تواصل معنا</a>
         </nav>
-        <a href={wa} target="_blank" rel="noreferrer" className="rounded-full bg-cyan-400 px-4 py-2.5 text-sm font-bold text-[#06101b] transition hover:bg-cyan-300">تواصل معنا <ArrowUpLeft className="mr-1 inline" size={16}/></a>
+        <AuthHeader whatsappUrl={wa} />
       </div>
     </header>
     <section id="home" className="relative mx-auto grid max-w-7xl items-center gap-12 px-5 pb-24 pt-20 md:grid-cols-2 md:pb-32 md:pt-28">
