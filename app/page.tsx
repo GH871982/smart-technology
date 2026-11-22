@@ -1,4 +1,5 @@
-import { ArrowUpLeft, Laptop, Monitor, Camera, Wifi, GraduationCap, Code2, Wrench, ShieldCheck, MessageCircle, Phone, MapPin, ArrowLeft, Zap, CheckCircle2, Cpu, Globe2, Settings2 } from "lucide-react";\nimport PageVisitTracker from "@/app/components/PageVisitTracker";
+import { ArrowUpLeft, Laptop, Monitor, Camera, Wifi, GraduationCap, Code2, Wrench, ShieldCheck, MessageCircle, Phone, MapPin, ArrowLeft, Zap, CheckCircle2, Cpu, Globe2, Settings2 } from "lucide-react";
+import PageVisitTracker from "@/app/components/PageVisitTracker";
 import AuthHeader from "@/app/components/AuthHeader";
 
 const phone = "01145524545";
