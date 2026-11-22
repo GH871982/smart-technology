@@ -1,4 +1,6 @@
 import { ArrowUpLeft, Laptop, Monitor, Camera, Wifi, GraduationCap, Code2, Wrench, ShieldCheck, MessageCircle, Phone, MapPin, ArrowLeft, Zap, CheckCircle2, Cpu, Globe2, Settings2 } from "lucide-react";
+import PageVisitTracker from "@/app/components/PageVisitTracker";
+import AuthHeader from "@/app/components/AuthHeader";
 
 const phone = "01145524545";
 const wa = "https://wa.me/201145524545";
@@ -15,7 +17,7 @@ const services = [
 const features = ["اختيار تقني مناسب لاحتياجك", "اهتمام بالتفاصيل وجودة التنفيذ", "حلول للأفراد والطلاب والشركات", "متابعة ودعم قبل وبعد الشراء"];
 
 export default function Home() {
-  return <main className="min-h-screen overflow-hidden bg-[#070A12] text-white">
+  return <main className="min-h-screen overflow-hidden bg-[#070A12] text-white"><PageVisitTracker/>
     <div className="pointer-events-none fixed inset-0 -z-0 opacity-70" style={{backgroundImage:"radial-gradient(ellipse at 80% 5%,rgba(24,119,242,.20),transparent 35%),radial-gradient(ellipse at 10% 40%,rgba(111,65,220,.13),transparent 35%)"}} />
     <header className="sticky top-0 z-40 border-b border-white/10 bg-[#070A12]/85 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4">
@@ -26,7 +28,7 @@ export default function Home() {
         <nav className="hidden items-center gap-8 text-sm text-white/65 md:flex">
           <a className="hover:text-cyan-300" href="#about">من نحن</a><a className="hover:text-cyan-300" href="#services">خدماتنا</a><a className="hover:text-cyan-300" href="#why">لماذا نحن</a><a className="hover:text-cyan-300" href="#contact">تواصل معنا</a>
         </nav>
-        <a href={wa} target="_blank" rel="noreferrer" className="rounded-full bg-cyan-400 px-4 py-2.5 text-sm font-bold text-[#06101b] transition hover:bg-cyan-300">تواصل معنا <ArrowUpLeft className="mr-1 inline" size={16}/></a>
+        <AuthHeader whatsappUrl={wa} />
       </div>
     </header>
     <section id="home" className="relative mx-auto grid max-w-7xl items-center gap-12 px-5 pb-24 pt-20 md:grid-cols-2 md:pb-32 md:pt-28">
