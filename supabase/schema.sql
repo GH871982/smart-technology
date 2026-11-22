@@ -37,3 +37,24 @@ create policy "Authenticated admins read visits" on public.page_visits for selec
 create index if not exists page_visits_visited_at_idx on public.page_visits (visited_at desc);
 create index if not exists page_visits_visitor_idx on public.page_visits (visitor_id);
 create index if not exists products_active_created_idx on public.products (active, created_at desc);
+
+-- Prevent users from promoting themselves by editing their own profile row.
+create or replace function public.protect_profile_role()
+returns trigger
+language plpgsql
+security definer set search_path = ''
+as $$
+begin
+  if new.role is distinct from old.role
+     and coalesce(auth.jwt() -> 'app_metadata' ->> 'role', '') not in ('super_admin','admin') then
+    raise exception 'Only an administrator can change account roles';
+  end if;
+  new.updated_at = now();
+  return new;
+end;
+$$;
+
+drop trigger if exists protect_profile_role_before_update on public.profiles;
+create trigger protect_profile_role_before_update
+  before update on public.profiles
+  for each row execute procedure public.protect_profile_role();
