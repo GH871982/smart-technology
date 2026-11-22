@@ -1,4 +1,4 @@
-import { ArrowUpLeft, Laptop, Monitor, Camera, Wifi, GraduationCap, Code2, Wrench, ShieldCheck, MessageCircle, Phone, MapPin, ArrowLeft, Zap, CheckCircle2, Cpu, Globe2, Settings2 } from "lucide-react";
+import { ArrowUpLeft, Laptop, Monitor, Camera, Wifi, GraduationCap, Code2, Wrench, ShieldCheck, MessageCircle, Phone, MapPin, ArrowLeft, Zap, CheckCircle2, Cpu, Globe2, Settings2 } from "lucide-react";\nimport PageVisitTracker from "@/app/components/PageVisitTracker";
 
 const phone = "01145524545";
 const wa = "https://wa.me/201145524545";
@@ -15,7 +15,7 @@ const services = [
 const features = ["اختيار تقني مناسب لاحتياجك", "اهتمام بالتفاصيل وجودة التنفيذ", "حلول للأفراد والطلاب والشركات", "متابعة ودعم قبل وبعد الشراء"];
 
 export default function Home() {
-  return <main className="min-h-screen overflow-hidden bg-[#070A12] text-white">
+  return <main className="min-h-screen overflow-hidden bg-[#070A12] text-white"><PageVisitTracker/>
     <div className="pointer-events-none fixed inset-0 -z-0 opacity-70" style={{backgroundImage:"radial-gradient(ellipse at 80% 5%,rgba(24,119,242,.20),transparent 35%),radial-gradient(ellipse at 10% 40%,rgba(111,65,220,.13),transparent 35%)"}} />
     <header className="sticky top-0 z-40 border-b border-white/10 bg-[#070A12]/85 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4">
