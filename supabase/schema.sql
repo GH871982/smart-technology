@@ -27,12 +27,12 @@ alter table public.page_visits enable row level security;
 drop policy if exists "Public reads active products" on public.products;
 create policy "Public reads active products" on public.products for select using (active = true);
 drop policy if exists "Authenticated admins manage products" on public.products;
-create policy "Authenticated admins manage products" on public.products for all to authenticated using (true) with check (true);
+create policy "Authenticated admins manage products" on public.products for all to authenticated using ((auth.jwt() -> 'app_metadata' ->> 'role') = 'admin') with check ((auth.jwt() -> 'app_metadata' ->> 'role') = 'admin');
 
 drop policy if exists "Public inserts page visits" on public.page_visits;
 create policy "Public inserts page visits" on public.page_visits for insert to anon, authenticated with check (length(visitor_id) between 8 and 80 and length(page_path) between 1 and 300);
 drop policy if exists "Authenticated admins read visits" on public.page_visits;
-create policy "Authenticated admins read visits" on public.page_visits for select to authenticated using (true);
+create policy "Authenticated admins read visits" on public.page_visits for select to authenticated using ((auth.jwt() -> 'app_metadata' ->> 'role') = 'admin');
 
 create index if not exists page_visits_visited_at_idx on public.page_visits (visited_at desc);
 create index if not exists page_visits_visitor_idx on public.page_visits (visitor_id);
